@@ -1,0 +1,139 @@
+### =================================
+### TESTES API EXPENSE TRACKER - LOCAL
+### =================================
+
+@host = http://localhost:8000
+
+### 1) Verificar API online
+GET {{host}}/
+
+### 2) Verificar documentação automática
+GET {{host}}/docs
+
+### 3) Listar transações (inicialmente vazio)
+GET {{host}}/transacoes
+
+### 4) Criar primeira transação (RECEITA)
+POST {{host}}/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Salário Agosto",
+  "valor": 3000.00,
+  "categoria": "Salário",
+  "tipo": "receita"
+}
+
+### 5) Criar segunda transação (DESPESA)
+POST {{host}}/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Supermercado",
+  "valor": 150.50,
+  "categoria": "Alimentação",
+  "tipo": "despesa"
+}
+
+### 6) Criar terceira transação (DESPESA)
+POST {{host}}/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Uber para faculdade",
+  "valor": 32.50,
+  "categoria": "Transporte",
+  "tipo": "despesa"
+}
+
+### 7) Listar todas as transações criadas
+GET {{host}}/transacoes
+
+### 8) Buscar transação específica por ID (1)
+GET {{host}}/transacoes/1
+
+### 9) Buscar transação específica por ID (2)
+GET {{host}}/transacoes/2
+
+### 10) Tentar buscar transação inexistente (erro esperado 404)
+GET {{host}}/transacoes/999
+
+
+### ===============================
+### TESTES DE FILTRO E SALDO
+### ===============================
+
+### 11) Buscar por tipo (despesa)
+GET {{host}}/transacoes/buscar?tipo=despesa
+
+### 12) Buscar por categoria (Alimentação)
+GET {{host}}/transacoes/buscar?categoria=Alimentação
+
+### 13) Buscar por termo na descrição ("sal")
+GET {{host}}/transacoes/buscar?termo=sal
+
+### 14) Ver saldo consolidado
+GET {{host}}/saldo
+
+
+### ===============================
+### TESTES DE ATUALIZAÇÃO E DELETE
+### ===============================
+
+### 15) Atualizar transação ID 2
+PUT {{host}}/transacoes/2
+Content-Type: application/json
+
+{
+  "descricao": "Supermercado (ajustado)",
+  "valor": 200.00,
+  "categoria": "Alimentação",
+  "tipo": "despesa"
+}
+
+### 16) Confirmar atualização
+GET {{host}}/transacoes/2
+
+### 17) Deletar transação ID 3
+DELETE {{host}}/transacoes/3
+
+### 18) Confirmar que foi deletada (erro esperado 404)
+GET {{host}}/transacoes/3
+
+
+### ===============================
+### TESTES DE VALIDAÇÃO (ERROS)
+### ===============================
+
+### 19) Valor negativo (deve falhar)
+POST {{host}}/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Erro valor",
+  "valor": -100,
+  "categoria": "Alimentação",
+  "tipo": "despesa"
+}
+
+### 20) Tipo inválido (deve falhar)
+POST {{host}}/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Erro tipo",
+  "valor": 50,
+  "categoria": "Outros",
+  "tipo": "bonus"
+}
+
+### 21) Categoria incompatível com tipo (deve falhar)
+POST {{host}}/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Erro categoria",
+  "valor": 200,
+  "categoria": "Salário",
+  "tipo": "despesa"
+}
