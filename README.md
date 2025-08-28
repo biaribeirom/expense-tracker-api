@@ -5,7 +5,7 @@ Permite cadastrar receitas e despesas, consultar saldo e buscar transações com
 
 ## links 
 - repositório GitHub: https://github.com/biaribeirom/expense-tracker-api
-- API no Azure: [https://seu-app.azurewebsites.net](https://expensetrackermulheres-d8c0byewhredd9aq.centralus-01.azurewebsites.net/ )
+- API no Azure: [https://expensetrackermulheres-d8c0byewhredd9aq.centralus-01.azurewebsites.net/ ]
 
 ## funcionalidades
 - cadastrar transações (receita ou despesa)
