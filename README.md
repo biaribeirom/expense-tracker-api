@@ -33,7 +33,7 @@ Permite cadastrar receitas e despesas, consultar saldo e buscar transações com
 
 1. clonar o repositório:
 ```
-   git clone https://github.com/SEU-USUARIO/expense-tracker-api.git
+   git clone https://github.com/biaribeirom/expense-tracker-api.git
    cd expense-tracker-api
 ```
 
